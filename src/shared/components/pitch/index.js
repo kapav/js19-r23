@@ -6,7 +6,66 @@ class Pitch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
+      age: '',
+      role: '',
+      nameValid: false,
+      ageValid: false,
+      roleValid: false,
       roles: ['', 'Гость', 'Модератор', 'Администратор']
+    }
+    this.nameOe = React.createRef();
+    this.ageOe = React.createRef();
+    this.roleOe = React.createRef();
+    this.onNameChange = this.onNameChange.bind(this);
+    this.onAgeChange = this.onAgeChange.bind(this);
+    this.onRoleChange = this.onRoleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  validatorRequired(field) {
+    return !!field;
+  }
+
+  validateName(login) {
+    return this.validatorRequired(login);
+  }
+
+  validateAge(age) {
+    return this.validatorRequired(age);
+  }
+
+  validateRole(role) {
+    return this.validatorRequired(role);
+  }
+
+  onNameChange() {
+    const value = this.nameOe.current.value;
+    const valid = this.validateName(value);
+    this.setState({name: value, nameValid: valid});
+  }
+
+  onAgeChange() {
+    const value = this.ageOe.current.value;
+    const valid = this.validateAge(value);
+    this.setState({age: value, ageValid: valid});
+  }
+
+  onRoleChange() {
+    const value = this.roleOe.current.value;
+    const valid = this.validateRole(value);
+    this.setState({role: value, roleValid: valid});
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.nameValid && this.state.ageValid && this.state.roleValid) {
+      console.log('Отправлено. Форма с неуправляемым компонентом.');
+      console.log({
+        name: this.state.name,
+        age: this.state.age,
+        role: this.state.role
+      });
     }
   }
 
@@ -14,6 +73,16 @@ class Pitch extends React.Component {
     return (
       <React.Fragment>
         <p>pitch works!</p>
+        <h3>Форма с неуправляемым компонентом</h3>
+        <form onSubmit={this.handleSubmit}>
+          <div>
+            <label htmlFor="nameOe">Имя</label>
+            <input type="text" id='nameOe'
+              ref={this.nameOe}
+              />
+          </div>
+          <button type="submit">Отправить</button>
+        </form>
       </React.Fragment>
     );
   }
