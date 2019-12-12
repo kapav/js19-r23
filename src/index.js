@@ -2,5 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './index.css';
+import HomePage from './home-page';
 
-ReactDOM.render(null, document.getElementById('root'));
+ReactDOM.render(<HomePage />, document.getElementById('root'));
