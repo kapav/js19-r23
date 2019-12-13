@@ -79,7 +79,40 @@ class Pitch extends React.Component {
             <label htmlFor="nameOe">Имя</label>
             <input type="text" id='nameOe'
               ref={this.nameOe}
-              />
+              onChange={this.onNameChange} />
+            {!this.state.nameValid &&
+              <div className="error-text">
+                Обязательное поле имени
+              </div>
+            }
+          </div>
+          <div>
+            <label htmlFor="ageOe">Возраст</label>
+            <input type="number" id="ageOe"
+              ref={this.ageOe}
+              onChange={this.onAgeChange} />
+            {!this.state.ageValid &&
+              <div className="error-text">
+                Обязательное поле возраста
+              </div>
+            }
+          </div>
+          <div>
+            <label htmlFor="roleOe">Роль</label>
+            <select id="roleOe"
+              ref={this.roleOe}
+              onChange={this.onRoleChange}>
+              {this.state.roles.map((r, index) =>
+                <option key={index} value={r}>
+                  {r}
+                </option>
+              )}
+            </select>
+            {!this.state.roleValid &&
+              <div className="error-text">
+                Обязательное поле роли
+              </div>
+            }
           </div>
           <button type="submit">Отправить</button>
         </form>
