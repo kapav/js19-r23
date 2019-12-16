@@ -6,9 +6,6 @@ class Pitch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      age: '',
-      role: '',
       nameValid: false,
       ageValid: false,
       roleValid: false,
@@ -42,19 +39,19 @@ class Pitch extends React.Component {
   onNameChange() {
     const value = this.nameOe.current.value;
     const valid = this.validateName(value);
-    this.setState({name: value, nameValid: valid});
+    this.setState({nameValid: valid});
   }
 
   onAgeChange() {
     const value = this.ageOe.current.value;
     const valid = this.validateAge(value);
-    this.setState({age: value, ageValid: valid});
+    this.setState({ageValid: valid});
   }
 
   onRoleChange() {
     const value = this.roleOe.current.value;
     const valid = this.validateRole(value);
-    this.setState({role: value, roleValid: valid});
+    this.setState({roleValid: valid});
   }
 
   handleSubmit(e) {
@@ -62,9 +59,9 @@ class Pitch extends React.Component {
     if (this.state.nameValid && this.state.ageValid && this.state.roleValid) {
       console.log('Отправлено. Форма с неуправляемым компонентом.');
       console.log({
-        name: this.state.name,
-        age: this.state.age,
-        role: this.state.role
+        name: this.nameOe.current.value,
+        age: this.ageOe.current.value,
+        role: this.roleOe.current.value
       });
     }
   }
